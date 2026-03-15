@@ -90,7 +90,7 @@ class VTubeStudio(PluginBase):
         self.add_action_holder(self.rotate_holder)
 
         self.movezoomrotate_holder = ActionHolder(
-            PluginBase = self,
+            plugin_base = self,
             action_base = MoveZoomRotate,
             action_id = "com_miikamenk_vtubestudio::MoveZoomRotate",
             action_name = self.lm.get("actions.movezoomrotate.name"),

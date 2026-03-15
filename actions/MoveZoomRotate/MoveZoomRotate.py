@@ -58,7 +58,7 @@ class MoveZoomRotate(ActionBase):
             pos = self.plugin_base.backend.getModelPosition()
             x = settings.get("x", pos['x'])
             y = settings.get("y", pos['y'])
-            zoom = settings.get("zoom", pos['zoom'])
+            zoom = settings.get("zoom", pos['size'])
             rot = settings.get("rotate", pos["rot"])
             move_time = settings.get("time", 0)
 
