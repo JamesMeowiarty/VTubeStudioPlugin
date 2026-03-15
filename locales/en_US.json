@@ -19,6 +19,7 @@
   "actions.pan.press_y": "Key press y",
   "actions.pan.held_x": "Key hold x",
   "actions.pan.held_y": "Key hold y",
+  "actions.movezoomrotate.name": "Move, Zoom, and Rotate",
   "actions.movezoomrotate.x": "x",
   "actions.movezoomrotate.y": "y",
   "actions.movezoomrotate.zoom": "zoom",
