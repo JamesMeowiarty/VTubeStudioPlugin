@@ -38,7 +38,7 @@ class Pan(ActionBase):
                 log.error(f"Error during connection/authentication process: {e}")
 
             pos = self.plugin_base.backend.getModelPosition()
-            self.set_center_label(f"{round(pos['x'],2)}, {round(pos['y'],2)}")
+            self.set_bottom_label(f"{round(pos['x'],2)}, {round(pos['y'],2)}")
 
 
     def event_callback(self, event: InputEvent, data: dict = None):
@@ -64,8 +64,8 @@ class Pan(ActionBase):
                 self.plugin_base.auth_lock = False
                 self.plugin_base.get_connected()
             pos = self.plugin_base.backend.getModelPosition()
-            x = settings.get("press_x")
-            y = settings.get("press_y")
+            x = settings.get("press_x", 0) + pos['x']
+            y = settings.get("press_y", 0) + pos['y']
             rot = pos["rot"]
             zoom = pos["size"]
             move_time = settings.get("time", 0)
@@ -87,8 +87,8 @@ class Pan(ActionBase):
                 self.plugin_base.auth_lock = False
                 self.plugin_base.get_connected()
             pos = self.plugin_base.backend.getModelPosition()
-            x = settings.get("held_x")
-            y = settings.get("held_y")
+            x = settings.get("held_x", 0) + pos['x']
+            y = settings.get("held_y", 0) + pos['y']
             rot = pos["rot"]
             zoom = pos["size"]
             move_time = settings.get("time", 0)

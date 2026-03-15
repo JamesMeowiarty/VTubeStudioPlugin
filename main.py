@@ -16,6 +16,7 @@ from .actions.TriggerHotkey.TriggerHotkey import TriggerHotkey
 from .actions.Pan.Pan import Pan
 from .actions.Zoom.Zoom import Zoom
 from .actions.Rotate.Rotate import Rotate
+from .actions.MoveZoomRotate.MoveZoomRotate import MoveZoomRotate
 
 
 class VTubeStudio(PluginBase):
@@ -87,6 +88,20 @@ class VTubeStudio(PluginBase):
             }
         )
         self.add_action_holder(self.rotate_holder)
+
+        self.movezoomrotate_holder = ActionHolder(
+            PluginBase = self,
+            action_base = MoveZoomRotate,
+            action_id = "com_miikamenk_vtubestudio::MoveZoomRotate",
+            action_name = self.lm.get("actions.movezoomrotate.name"),
+            action_support={
+                Input.Key: ActionInputSupport.SUPPORTED,
+                Input.Dial: ActionInputSupport.UNSUPPORTED,
+                Input.Touchscreen: ActionInputSupport.UNTESTED
+            }
+        )
+        self.add_action_holder(self.movezoomrotate_holder)
+        
 
         # Register plugin
         self.register(
