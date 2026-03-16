@@ -29,13 +29,13 @@ class TriggerHotkey(ActionBase):
         if not self.plugin_base.auth_lock:
             try:
                 self.plugin_base.get_connected()
-                if not self.plugin_base.auth:
+                if self.plugin_base.auth:
+                    self.set_label(text=settings.get("hotkey"), position="bottom", update=True)
+                else:
                     log.info("Not connected. Make sure VTubeStudio api is running")
             except Exception as e:
                 self.plugin_base.auth = False
                 log.error(f"Error during connection/authentication process: {e}")
-
-            self.set_label(text=settings.get("hotkey"), position="bottom", update=True)
 
         
     def on_ready(self) -> None:

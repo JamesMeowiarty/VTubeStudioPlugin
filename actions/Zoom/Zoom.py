@@ -30,14 +30,14 @@ class Zoom(ActionBase):
         if not self.plugin_base.auth_lock:
             try:
                 self.plugin_base.get_connected()
-                if not self.plugin_base.auth:
+                if self.plugin_base.auth:
+                    pos = self.plugin_base.backend.getModelPosition()
+                    self.set_center_label(f"{round(pos['size'],2)}")
+                else:
                     log.info("Not connected. Make sure VTubeStudio api is running")
             except Exception as e:
                 self.plugin_base.auth = False
                 log.error(f"Error during connection/authentication process: {e}")
-
-            pos = self.plugin_base.backend.getModelPosition()
-            self.set_center_label(f"{round(pos['size'],2)}")
 
 
     def event_callback(self, event: InputEvent, data: dict = None):
