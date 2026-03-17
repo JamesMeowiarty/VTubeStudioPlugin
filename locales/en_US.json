@@ -24,5 +24,6 @@
   "actions.movezoomrotate.y": "y",
   "actions.movezoomrotate.zoom": "zoom",
   "actions.movezoomrotate.rotate": "rotate",
+  "actions.changemodel.name": "Change Model",
   "actions.changemodel.changemodel": "Change Model"
 }

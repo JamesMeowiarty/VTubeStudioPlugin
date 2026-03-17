@@ -17,6 +17,7 @@ from .actions.Pan.Pan import Pan
 from .actions.Zoom.Zoom import Zoom
 from .actions.Rotate.Rotate import Rotate
 from .actions.MoveZoomRotate.MoveZoomRotate import MoveZoomRotate
+from .actions.ChangeModel.ChangeModel import ChangeModel
 
 
 class VTubeStudio(PluginBase):
@@ -102,6 +103,18 @@ class VTubeStudio(PluginBase):
         )
         self.add_action_holder(self.movezoomrotate_holder)
         
+        self.changemodel_holder = ActionHolder(
+            plugin_base = self,
+            action_base = ChangeModel,
+            action_id = "com_miikamenk_vtubestudio::ChangeModel",
+            action_name = self.lm.get("actions.changemodel.name"),
+            action_support={
+                Input.Key: ActionInputSupport.SUPPORTED,
+                Input.Dial: ActionInputSupport.UNSUPPORTED,
+                Input.Touchscreen: ActionInputSupport.UNTESTED
+            }
+        )
+        self.add_action_holder(self.changemodel_holder)
 
         # Register plugin
         self.register(
