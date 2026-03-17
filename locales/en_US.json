@@ -23,5 +23,6 @@
   "actions.movezoomrotate.x": "x",
   "actions.movezoomrotate.y": "y",
   "actions.movezoomrotate.zoom": "zoom",
-  "actions.movezoomrotate.rotate": "rotate"
+  "actions.movezoomrotate.rotate": "rotate",
+  "actions.changemodel.changemodel": "Change Model"
 }

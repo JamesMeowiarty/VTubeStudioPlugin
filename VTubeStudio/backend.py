@@ -60,6 +60,12 @@ class Backend(BackendBase):
 
     def getModelPosition(self):
         return self.conn.root.get_model_postion()
+    
+    def getModels(self):
+        return self.conn.root.getModels()
+    
+    async def changeModel(self, model_id):
+        return self.conn.root.changeModel(model_id)
 
     def shutdown(self):
         if self.server_process:
