@@ -56,7 +56,7 @@ class ChangeModel(ActionBase):
     
     def get_config_rows(self) -> list:
         self.models_string_list = Gtk.StringList()
-        self.models_row = Adw.ComboRow(title=self.plugin_base.lm.get("actions.trigger_hotkey.hotkey"), model=self.models_string_list)
+        self.models_row = Adw.ComboRow(title=self.plugin_base.lm.get("actions.changemodel.changemodel"), model=self.models_string_list)
         self.models_row.set_enable_search(True)
 
         self.load_model_string_list()
@@ -79,10 +79,10 @@ class ChangeModel(ActionBase):
         log.info(f"Loaded settings: {settings}")
         if settings == None:
             return
-        hotkey = settings.get("hotkey")
-        for i, hotkey_model in enumerate(self.hotkey_model):
-            if hotkey_model.get_string() == hotkey:
-                self.hotkey_row.set_selected(i)
+        model_name = settings.get("model_name")
+        for i, model_string_model in enumerate(self.models_string_list):
+            if model_string_model.get_string() == model_name:
+                self.models_row.set_selected(i)
                 return
  
     def on_hotkey_change(self, combo, *args):
