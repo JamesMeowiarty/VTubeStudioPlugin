@@ -65,7 +65,7 @@ class ChangeModel(ActionBase):
 
         self.load_config_settings()
 
-        return [self.hotkey_row]
+        return [self.models_row]
  
     def load_model_string_list(self):
         self.models_dict = self.plugin_base.backend.getModels()
@@ -85,7 +85,7 @@ class ChangeModel(ActionBase):
                 self.models_row.set_selected(i)
                 return
  
-    def on_hotkey_change(self, combo, *args):
+    def on_model_change(self, combo, *args):
         model_name = combo.get_selected_item().get_string()
 
         settings = self.get_settings()
