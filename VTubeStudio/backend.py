@@ -62,7 +62,11 @@ class Backend(BackendBase):
         return self.conn.root.get_model_postion()
     
     def getModels(self):
-        return self.conn.root.get_models()
+        models = self.conn.root.get_models()
+        avalable_models = {}
+        for x in models:
+            avalable_models[x[0]] = x[1]
+        return avalable_models
     
     def changeModel(self, model_id):
         return self.conn.root.change_model(model_id)

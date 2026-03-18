@@ -48,8 +48,8 @@ class ChangeModel(ActionBase):
                 self.plugin_base.auth_lock = False
                 self.plugin_base.get_connected()
             settings = self.get_settings()
-            model_name = settings.get("model_name")
-            self.plugin_base.backend.changeModel(self.models_dict[model_name])
+            model_id = settings.get("model_id")
+            self.plugin_base.backend.changeModel(model_id)
         except Exception as e:
             log.error(f"on_key_down error: {e}")
             self.plugin_base.get_connected(True)

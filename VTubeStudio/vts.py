@@ -99,17 +99,17 @@ class VTSController():
         await self.vts.close()
         return result
 
-    async def getModels(self)->dict[str, str]:
+    async def getModels(self):
         await self.vts.connect()
         await self.vts.request_authenticate()
 
-        available_models = {}
+        available_models = []
 
         model_request = self.vts.vts_request.BaseRequest('AvailableModelsRequest')
         model_request_data =  await self.vts.request(model_request)
 
         for model in model_request_data['data'].get('availableModels', {'modenlName': 'NotFound', 'modelID': 'NotFound'}):
-            available_models[model['modelName']] = model['modelID']
+            available_models.append((model['modelName'], model['modelID']))
 
         await self.vts.close()
         return available_models
@@ -118,8 +118,8 @@ class VTSController():
         await self.vts.connect()
         await self.vts.request_authenticate()
 
-        model_change_request = await self.vts.vts_request.BaseRequest('ModelLoadRequest', {'modelID': model_id})
-        self.vts.request(model_change_request)
+        model_change_request = self.vts.vts_request.BaseRequest('ModelLoadRequest', {'modelID': model_id})
+        await self.vts.request(model_change_request)
 
         await self.vts.close()
         return True
