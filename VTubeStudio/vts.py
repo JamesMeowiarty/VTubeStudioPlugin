@@ -105,7 +105,7 @@ class VTSController():
 
         available_models = {}
 
-        model_request = self.vts.vts_request('AvailableModelsRequest')
+        model_request = self.vts.vts_request.BaseRequest('AvailableModelsRequest')
         model_request_data =  await self.vts.request(model_request)
 
         for model in model_request_data['data'].get('availableModels', {'modenlName': 'NotFound', 'modelID': 'NotFound'}):
@@ -118,7 +118,7 @@ class VTSController():
         await self.vts.connect()
         await self.vts.request_authenticate()
 
-        model_change_request = await self.vts.vts_request('ModelLoadRequest', {'modelID': model_id})
+        model_change_request = await self.vts.vts_request.BaseRequest('ModelLoadRequest', {'modelID': model_id})
         self.vts.request(model_change_request)
 
         await self.vts.close()

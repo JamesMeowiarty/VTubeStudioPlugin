@@ -41,6 +41,12 @@ class VTSControlService(rpyc.Service):
             rot=float(result["rot"]),
             size=float(result["size"])
         )
+    
+    def exposed_get_models(self):
+        return self._run_async(self.vtsc.getModels)
+    
+    def exposed_change_model(self, model_id):
+        return self._run_async(self.vtsc.changeModel, model_id)
 
     def _run_async(self, func, *args):
         """Helper to run async functions in a sync context."""
