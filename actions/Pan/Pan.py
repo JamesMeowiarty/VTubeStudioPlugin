@@ -148,6 +148,17 @@ class Pan(ActionBase):
         settings = self.get_settings()
         if settings == None:
             return
+        
+        # Initialize any uninitialized settings
+        settings_variables = ["x", "y", "press_x", "press_y", "hold_x", "hold_y", "time"]
+        settings_need_initialized = False
+        for settings_variable in settings_variables:
+            if not settings.get(settings_variable):
+                settings_variables[settings_variable] = 0
+                settings_need_initialized
+        if settings_need_initialized:
+            self.set_settings(settings)
+
         self.x_scale.scale.set_value(settings.get("x", 0))
         self.y_scale.scale.set_value(settings.get("y", 0))
         self.press_x_scale.scale.set_value(settings.get("press_x", 0))

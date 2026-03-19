@@ -93,11 +93,22 @@ class MoveZoomRotate(ActionBase):
         settings = self.get_settings()
         if settings == None:
             return
-        self.x.scale.set_value(settings.get("x", 0))
-        self.y.scale.set_value(settings.get("y", 0))
-        self.zoom.scale.set_value(settings.get("zoom", 0))
-        self.rotate.scale.set_value(settings.get("rotate", 0))
-        self.time_scale.scale.set_value(settings.get("time", 0))
+        
+        # Initialize any uninitialized settings
+        settings_variables = ["x", "y", "zoom", "rotate", "time"]
+        settings_need_initialized = False
+        for settings_variable in settings_variables:
+            if not settings.get(settings_variable):
+                settings_variables[settings_variable] = 0
+                settings_need_initialized
+        if settings_need_initialized:
+            self.set_settings(settings)
+
+        self.x.scale.set_value(settings.get("x"))
+        self.y.scale.set_value(settings.get("y"))
+        self.zoom.scale.set_value(settings.get("zoom"))
+        self.rotate.scale.set_value(settings.get("rotate"))
+        self.time_scale.scale.set_value(settings.get("time"))
  
     def on_x_change(self, scale, *args):
         settings = self.get_settings()

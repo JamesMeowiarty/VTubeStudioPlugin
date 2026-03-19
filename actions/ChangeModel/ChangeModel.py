@@ -35,9 +35,9 @@ class ChangeModel(ActionBase):
         settings = self.get_settings()
         icon_path = os.path.join(self.plugin_base.PATH, "assets", "vts.png")
         self.set_media(media_path=icon_path, size=0.75)
+        self.on_tick()
         if settings:
             self.set_label(text=settings.get("model_name"), position="bottom", update=True)
-        self.on_tick()
 
     def on_key_down(self) -> None:
         ## removing possible api lock because of user interaction
@@ -74,13 +74,20 @@ class ChangeModel(ActionBase):
  
     def load_config_settings(self):
         settings = self.get_settings()
-        log.info(f"Loaded settings: {settings}")
         if settings == None:
             return
+
         model_name = settings.get("model_name")
+        if not model_name:
+            model_name = self.models_string_list[0].get_string()
+            settings["model_name"] = model_name
+            settings['model_id'] = self.models_dict[model_name]
+            self.set_settings(settings)
+
         for i, model_string_model in enumerate(self.models_string_list):
             if model_string_model.get_string() == model_name:
                 self.models_row.set_selected(i)
+                self.set_label(text=model_name, position="bottom", update=True)
                 return
  
     def on_model_change(self, combo, *args):
@@ -89,5 +96,6 @@ class ChangeModel(ActionBase):
         settings = self.get_settings()
         settings["model_name"] = model_name
         settings['model_id'] = self.models_dict[model_name]
+        self.set_label(text=model_name, position="bottom", update=True)
 
         self.set_settings(settings)
