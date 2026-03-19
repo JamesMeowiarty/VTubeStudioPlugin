@@ -154,7 +154,7 @@ class Pan(ActionBase):
         settings_need_initialized = False
         for settings_variable in settings_variables:
             if not settings.get(settings_variable):
-                settings_variables[settings_variable] = 0
+                settings[settings_variable] = 0
                 settings_need_initialized
         if settings_need_initialized:
             self.set_settings(settings)
