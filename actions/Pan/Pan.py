@@ -24,10 +24,6 @@ class Pan(ActionBase):
         self.has_configuration = True
 
     def on_tick(self):
-        icon_path = os.path.join(self.plugin_base.PATH, "assets", "pan.png")
-        self.set_media(media_path=icon_path, size=0.75)
-
-
         if not self.plugin_base.auth_lock:
             try:
                 self.plugin_base.get_connected()
@@ -55,6 +51,8 @@ class Pan(ActionBase):
             self.on_key_down()
         
     def on_ready(self) -> None:
+        icon_path = os.path.join(self.plugin_base.PATH, "assets", "pan.png")
+        self.set_media(media_path=icon_path, size=0.75)
         self.on_tick()
 
 

@@ -22,23 +22,21 @@ class ChangeModel(ActionBase):
         self.has_configuration = True
 
     def on_tick(self):
-        settings = self.get_settings()
-        icon_path = os.path.join(self.plugin_base.PATH, "assets", "vts.png")
-        self.set_media(media_path=icon_path, size=0.75)
-
         if not self.plugin_base.auth_lock:
             try:
                 self.plugin_base.get_connected()
-                if self.plugin_base.auth:
-                    self.set_label(text=settings.get("model_name"), position="bottom", update=True)
-                else:
+                if not self.plugin_base.auth:
                     log.info("Not connected. Make sure VTubeStudio api is running")
             except Exception as e:
                 self.plugin_base.auth = False
                 log.error(f"Error during connection/authentication process: {e}")
 
-        
     def on_ready(self) -> None:
+        settings = self.get_settings()
+        icon_path = os.path.join(self.plugin_base.PATH, "assets", "vts.png")
+        self.set_media(media_path=icon_path, size=0.75)
+        if settings:
+            self.set_label(text=settings.get("model_name"), position="bottom", update=True)
         self.on_tick()
 
     def on_key_down(self) -> None:
