@@ -78,15 +78,22 @@ class TriggerHotkey(ActionBase):
         if settings == None:
             return
         hotkey = settings.get("hotkey")
+        if not hotkey:
+            hotkey = self.hotkey_model[0].get_string()
+            settings["hotkey"] = hotkey 
+            self.set_settings(settings)
         for i, hotkey_model in enumerate(self.hotkey_model):
             if hotkey_model.get_string() == hotkey:
                 self.hotkey_row.set_selected(i)
+                self.set_label(text=hotkey, position="bottom", update=True)
                 return
  
     def on_hotkey_change(self, combo, *args):
         hotkey = combo.get_selected_item().get_string()
 
         settings = self.get_settings()
-        settings["hotkey"] = hotkey 
+        settings["hotkey"] = hotkey
+
+        self.set_label(text=hotkey, position="bottom", update=True)
 
         self.set_settings(settings)
